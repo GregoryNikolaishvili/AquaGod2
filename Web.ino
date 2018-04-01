@@ -564,7 +564,7 @@ void outputJsonInfo(WebServer &server)
 
 void uptime(unsigned long milli, char* buffer)
 {
-	static char _return[32];
+	//static char _return[32];
 	unsigned long secs = milli / 1000, mins = secs / 60;
 	unsigned int hours = mins / 60, days = hours / 24;
 	milli -= secs * 1000;
@@ -610,7 +610,7 @@ void outputWebInfo(WebServer &server)
 	P(htmlHead) = "<html><head><title>AquaGod 2</title><style type=\"text/css\">body {width:288px;zoom:250%} button {width: 100px;}.cold {color:blue;}.hot {color:red;}table{border-collapse: collapse;}table td{border-bottom: 1px dotted black;padding: 4px;width: 150px;}</style></head><body><table>"; 
 	P(table) = "<table>";
 	P(_table) = "</table>";
-	P(separator) = "<tr style=\"height:10px\"><td colspan=\"2\"></td></tr>";
+	//P(separator) = "<tr style=\"height:10px\"><td colspan=\"2\"></td></tr>";
 
 	server.httpSuccess();
 	server.printP(htmlHead);

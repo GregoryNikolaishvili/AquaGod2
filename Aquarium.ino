@@ -84,7 +84,7 @@ void initAquarium()
 	setDailyAlarm(settings.feed3StartTime * SECS_PER_MIN, fishFeederTimer, "Fish Feed 3", 3, DEVICE_ON);
 }
 
-AlarmID_t setDailyAlarm(time_t value, OnTick_t onTickHandler, const char* eventName, byte id, int state)  // trigger daily at given time of day
+void setDailyAlarm(time_t value, OnTick_t onTickHandler, const char* eventName, byte id, int state)  // trigger daily at given time of day
 {
 	if (value != AlarmHM_Minutes(0, 0))
 		Alarm.alarmRepeat(value, onTickHandler, eventName, id, state);
@@ -251,6 +251,7 @@ boolean aquariumHeater_SET(byte device_id, int state)
 		state = 100;
 
 	deviceSetCurrentState(device_id, state);
+	return true;
 }
 
 boolean co2_SET(byte device_id, int state)
@@ -285,7 +286,7 @@ boolean filter_SET(byte device_id, int state)
 		}
 	}
 
-	deviceRelaySetState(device_id, state);
+	return deviceRelaySetState(device_id, state);
 }
 
 boolean drainFill_SET(byte device_id, int state)
@@ -293,7 +294,7 @@ boolean drainFill_SET(byte device_id, int state)
 	if (state <= 0)
 		waterChangeState = WATER_CHANGE_STATE_NONE;
 
-	deviceRelaySetState(device_id, state);
+	return deviceRelaySetState(device_id, state);
 }
 
 void processAquariumHeaters()

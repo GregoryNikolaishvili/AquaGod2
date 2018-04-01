@@ -2,7 +2,7 @@ extern LiquidCrystal_I2C lcd;
 
 enum log_types { NO_LOG, DO_LOG };
 
-typedef struct device
+struct device
 {
 	const char* name;
 	int pin;

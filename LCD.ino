@@ -235,7 +235,7 @@ void showLcdInfoDefMode()
 
 void showLcdStateMode1()
 {
-	int X;
+	//int X;
 	byte row = 0;
 
 	for (byte device_id = lcdScrollValueY; device_id < lcdScrollValueY + 4; device_id++)

@@ -144,7 +144,7 @@ void Logging::open_file()
 		if (file) 
 			_log_to_file = &file;
 		else
-			Error(F("Cannot write to datafile"CR));
+			Error(F("Cannot write to datafile\r"));
 	}
 }
 
