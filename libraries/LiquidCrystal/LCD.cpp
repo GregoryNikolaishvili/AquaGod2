@@ -117,6 +117,7 @@ void LCD::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
       
       // finally, set to 4-bit interface
       send ( 0x02, FOUR_BITS ); 
+	  delayMicroseconds(150); // added by GIA
    } 
    else 
    {
@@ -133,6 +134,7 @@ void LCD::begin(uint8_t cols, uint8_t lines, uint8_t dotsize)
       
       // third go
       command(LCD_FUNCTIONSET | _displayfunction);
+	  delayMicroseconds(100);  // added by GIA
    }
    
    // finally, set # lines, font size, etc.

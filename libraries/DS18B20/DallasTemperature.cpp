@@ -181,6 +181,7 @@ void DallasTemperature::writeScratchPad(const uint8_t* deviceAddress, const uint
     _wire->select(deviceAddress); //<--this line was missing
     // save the newly written values to eeprom
     _wire->write(COPYSCRATCH, parasite);
+    delay(20);  // <--- added 20ms delay to allow 10ms long EEPROM write operation (as specified by datasheet) 
     if (parasite) delay(10); // 10ms delay
     _wire->reset();
 }
@@ -408,7 +409,6 @@ float DallasTemperature::getTempFByIndex(uint8_t deviceIndex)
     return getTempF((uint8_t*)deviceAddress);
 }
 
-
 // reads scratchpad and returns fixed-point temperature, scaling factor 2^-7
 int16_t DallasTemperature::calculateTemperature(const uint8_t* deviceAddress, uint8_t* scratchPad)
 {
@@ -420,14 +420,14 @@ int16_t DallasTemperature::calculateTemperature(const uint8_t* deviceAddress, ui
     DS1820 and DS18S20 have a 9-bit temperature register.
 
     Resolutions greater than 9-bit can be calculated using the data from
-    the temperature, and COUNT REMAIN and COUNT PER Â°C registers in the
+    the temperature, and COUNT REMAIN and COUNT PER °C registers in the
     scratchpad.  The resolution of the calculation depends on the model.
 
-    While the COUNT PER Â°C register is hard-wired to 16 (10h) in a
+    While the COUNT PER °C register is hard-wired to 16 (10h) in a
     DS18S20, it changes with temperature in DS1820.
 
     After reading the scratchpad, the TEMP_READ value is obtained by
-    truncating the 0.5Â°C bit (bit 0) from the temperature data. The
+    truncating the 0.5°C bit (bit 0) from the temperature data. The
     extended resolution temperature can then be calculated using the
     following equation:
 
