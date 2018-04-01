@@ -1,0 +1,122 @@
+DS18B20 Pins (Old One)
+	RED - VCC
+	BLACK - GROUND
+	BLUE - DATA
+	4.7K Pullup is required
+
+DS18B20 Pins (New One)
+	RED - VCC
+	YELLOW - GROUND
+	GREEN - DATA
+	4.7K Pullup is required
+
+DHT21/AM2301 Pins
+	RED - VCC
+	BLACK - GROUND
+	YELLOW - DATA
+
+L298N H-BRIDGE
+	5V-EN - Should be open
+	ENA - Should be close
+	ENB - Should be open
+	IN1 - Forward
+	IN2 - Reverse
+
+---------------------------------------
+
+-------- 10 (1 x 8 + power?)
+LIGHT BOX (8 RELAYS)
+8 DATA
+2 +5VCC & GND
+
+-------- 21 (3 x 8? + power?)
+SUMP BOX (8 RELAYS, 1 H-Bridge, 1 PH Meter (I2C now), 1 DS18B20, 2 water level sensors, 1-2 rain sensors)
+8 DATA
+2 +5VCC & GND
+4 Solenoid control
+1 One Wire (DS18B20)
+2 I2C (PH)
+2 Float switch
+2 Rain sensor
+
+
+PIN_FAN_BOARD
+
+
+00	-	RX				-	---
+01	-	TX				-	---
+02	-	INT 0			-	PIN_BOARD_FAN_TACH		(in aqua)
+03	-	INT 1			-	
+04	-	PIN_SD_CARD		-	---
+05	-					-	PIN_SOLENOID_IN1		(in sump)
+06	-					-	PIN_SOLENOID_IN2		(in sump)
+07	-					-	PIN_HEATER_1			(in aqua)
+08	-					-	PIN_HEATER_2			(in aqua)
+09	-					-	PIN_DHT21				(in aqua)
+10	-	PIN_ETHERNET	-	---
+11	-					-	--- could be problems with ethernet shield
+12	-					-	--- could be problems with ethernet shield
+13	-	LED_BUILTIN		-	PIN_BLINKING_LED		(in aqua) --- could be problems with ethernet shield?
+14	-	TX3				-	PIN_ULTRASONIC_TX	(in sump)
+15	-	RX3				-	PIN_ULTRASONIC_RX	(in sump)
+16	-	TX2				-	PIN_PH2_SERIAL_TX	(in sump)
+17	-	RX2				-	PIN_PH2_SERIAL_RX	(in sump)
+18	-	TX1				-	PIN_PH1_SERIAL_TX	(PH NEW, in aqua box)
+19	-	RX1				-	PIN_PH1_SERIAL_RX	(PH NEW, in aqua box)
+20	-	SDA				-	SDA					(LCD, DS3231 RTC, PH OLD (in sump))	- WHITE
+21	-	SCL				-	SCL					(LCD, DS3231 RTC, PH OLD (in sump))	- GREEN
+
+22	-					-	PIN_LIGHT_1			(in light)
+23	-					-	PIN_LIGHT_2			(in light)
+24	-					-	PIN_LIGHT_3			(in light)
+25	-					-	PIN_LIGHT_4			(in light)
+26	-					-	PIN_LIGHT_5			(in light)
+27	-					-	PIN_LIGHTS_FAN	(in light)
+28	-					-	PIN_FEEDER_1		(in light)
+29	-					-	PIN_FEEDER_2		(in light)
+
+30	-					-	PIN_O2					(in aqua)			RELAY BOARD #1		
+31	-					-	PIN_BOARD2_RELAY8		(in aqua)			RELAY BOARD #8
+32	-					-	PIN_CO2					(in aqua)			RELAY BOARD #2
+33	-					-	PIN_BOARD2_RELAY7		(in aqua)			RELAY BOARD #7		
+34	-					-	PIN_CO2_PUMP			(in aqua)			RELAY BOARD #3
+35	-					-	PIN_220B				(in aqua)			RELAY BOARD #6
+36	-					-	PIN_RECIRCULATE_PUMP	(in aqua)			RELAY BOARD #4
+37	-					-	PIN_220A				(in aqua)			RELAY BOARD #5
+
+38	-					-	PIN_SUMP_PUMP			(in sump)		RELAY 1
+39	-					-	PIN_BOARD3_RELAY4		(in sump)		RELAY 4
+40	-					-	PIN_SUMP_O2				(in sump)		RELAY 2
+41	-					-	PIN_SUMP_RECIRCULATE_PUMP	(in sump)	RELAY 8
+42	-					-	PIN_UV_LIGHT			(in sump)		RELAY 3
+43	-					-	PIN_CANISTER_FILTER2	(in sump)		RELAY 7
+44	-					-	PIN_CANISTER_FILTER1	(in sump)		RELAY 5
+45	-					-	PIN_BOARD3_RELAY6		(in sump)		RELAY 6
+
+46	-					-	PIN_BOARD_FAN_PWM		(in aqua)
+47	-					-	PIN_ULTRASONIC_AQUARIUM_TX
+48	-					-	PIN_ONE_WIRE_BUS		(DS18B20 Sensors, >= 5 sensors)
+49	-					-	PIN_ULTRASONIC_AQUARIUM_RX
+50	-	MISO			-	---
+51	-	MOSI			-	---
+52	-	SCK				-	---
+53	-	SS				-	---
+54	-
+ 
+A0	-	SD Write Prot.	-	---	
+A1	-	SD Detect		-	---
+A2	-
+A3	-					-	
+A4	-					-	
+A5	-
+A6	-
+A7	-
+A8	-					-	PIN_WATER_LEVEL_SUMP_LOW		(in sump)
+A9	-					-	PIN_WATER_LEVEL_SUMP_HIGH		(in sump)
+A10	-					-	PIN_SUMP_HEATER					(#16 in sump box)
+A11	-					-	PIN_WATER_IS_ON_FLOOR1			(in sump)
+A12	-					-	PIN_WATER_IS_ON_FLOOR2			(in sump)
+A13	-					-	PIN_HOSPITAL_HEATER				 (#4 in sump box)
+A14	-					-	PIN_WATER_LEVEL_AQUARIUM_HIGH	(in aqua box)
+A15	-					-	PIN_WATER_LEVEL_AQUARIUM_HIGH2	(in aqua box)
+   	
