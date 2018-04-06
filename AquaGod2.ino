@@ -20,8 +20,6 @@
 #include <SPI.h> // 0 bytes
 #include <Ethernet.h> // 668 bytes
 #include <WebServer.h>
-#include <avr/eeprom.h>
-#include <EEPROM.h>
 #include <SD.h>
 #include <LiquidCrystal_I2C.h>
 #include <Logging.h>
@@ -49,6 +47,8 @@ String inData = "";
 bool initializingBoard = true;
 unsigned long secondTicks = 0;
 
+Logger logger;
+
 ///////////////////
 
 void setup()
@@ -60,7 +60,7 @@ void setup()
 	if (dtNBR_ALARMS != 30)
 		aquaGodState.setErrorCode(ERR_SYSTEM);
 
-	Log.Init(LOG_LEVEL_VERBOSE, 115200); // also calls Serial.begin
+	Log.Init(LOG_LEVEL_VERBOSE, &logger); // also calls Serial.begin
 	Log.Info(F("\r\nInitializing.."), 0);
 
 	pinMode(PIN_BLINKING_LED, OUTPUT);
@@ -561,3 +561,11 @@ void processCommand()
 		return;
 	}
 }
+
+
+size_t Logger::write(uint8_t c)
+{
+	return Serial.write(c);
+}
+
+

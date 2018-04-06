@@ -182,20 +182,20 @@ void processWaterLevels()
 
 	switch (waterChangeState)
 	{
-	WATER_CHANGE_STATE_DRAIN:
-		if (aquaGodState.getAquariumWaterLevel() < settings.waterDrainLevel)
-			deviceSetState(WATER_DRAIN_PUMP, 0);
-		break;
-	WATER_CHANGE_STATE_FILL:
-		if (aquaGodState.getAquariumWaterLevel() > 110)
-			deviceSetState(WATER_FILL_PUMP, 0);
-		break;
-	WATER_CHANGE_STATE_DRAIN2:
-		if (aquaGodState.getAquariumWaterLevel() <= 100)
-			deviceSetState(WATER_DRAIN_PUMP, 0);
-		break;
-	default:
-		break;
+		WATER_CHANGE_STATE_DRAIN:
+			if (aquaGodState.getAquariumWaterLevel() < settings.waterDrainLevel)
+				deviceSetState(WATER_DRAIN_PUMP, 0);
+			break;
+		WATER_CHANGE_STATE_FILL:
+			if (aquaGodState.getAquariumWaterLevel() > 110)
+				deviceSetState(WATER_FILL_PUMP, 0);
+			break;
+		WATER_CHANGE_STATE_DRAIN2:
+			if (aquaGodState.getAquariumWaterLevel() <= 100)
+				deviceSetState(WATER_DRAIN_PUMP, 0);
+			break;
+		default:
+			break;
 	}
 }
 

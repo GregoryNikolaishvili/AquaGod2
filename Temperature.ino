@@ -25,7 +25,7 @@ void saveDS18B20SensorsData()
 
 bool isSameSensorAddress(const DeviceAddress addr1, const DeviceAddress addr2)
 {
-	for (int i = 0; i < sizeof(DeviceAddress); i++)
+	for (byte i = 0; i < sizeof(DeviceAddress); i++)
 	{
 		if (addr1[i] != addr2[i])
 			return false;
@@ -35,7 +35,7 @@ bool isSameSensorAddress(const DeviceAddress addr1, const DeviceAddress addr2)
 
 void clearSensorAddress(DeviceAddress addr)
 {
-	for (int i = 0; i < sizeof(DeviceAddress); i++)
+	for (byte i = 0; i < sizeof(DeviceAddress); i++)
 		addr[i] = 0;
 }
 
@@ -51,7 +51,7 @@ void clearSensorAddress(DeviceAddress addr)
 
 void copySensorAddress(const DeviceAddress addrFrom, DeviceAddress addrTo)
 {
-	for (int i = 0; i < sizeof(DeviceAddress); i++)
+	for (byte i = 0; i < sizeof(DeviceAddress); i++)
 		addrTo[i] = addrFrom[i];
 }
 
@@ -85,7 +85,7 @@ void initTempSensors()
 
 	DeviceAddress addr;
 	// first pass
-	for (int i = 0; i < ds18b20SensorCount; i++)
+	for (byte i = 0; i < ds18b20SensorCount; i++)
 	{
 		if (ds18b20Sensors.getAddress(addr, i))
 		{
@@ -102,7 +102,7 @@ void initTempSensors()
 	}
 
 	// second pass. fill gaps if possible
-	for (int i = 0; i < ds18b20SensorCount; i++)
+	for (byte i = 0; i < ds18b20SensorCount; i++)
 	{
 		if (ds18b20Sensors.getAddress(addr, i))
 		{
@@ -134,7 +134,7 @@ void initTempSensors()
 	}
 
 	aquaGodState.unsetErrorCode(ERR_TEMPERATURES);
-	for (int j = 0; j < MAX_DS1820_SENSORS; j++)
+	for (byte j = 0; j < MAX_DS1820_SENSORS; j++)
 	{
 		if (!tempSensors[j].isActive && tempSensors[j].isRequired)
 			aquaGodState.setErrorCode(ERR_TEMPERATURES);

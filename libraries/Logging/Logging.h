@@ -3,7 +3,6 @@
 #include <inttypes.h>
 #include <stdarg.h>
 #include <Time.h>
-#include <SD.h>
 #if defined(ARDUINO) && ARDUINO >= 100
 #include "Arduino.h"
 #else
@@ -25,7 +24,7 @@ extern "C" {
 #define LOGLEVEL LOG_LEVEL_DEBUG 
 
 
-#define CR "\r\n"
+#define CRNL "\r\n"
 #define LOGGING_VERSION 1
 
 /*!
@@ -73,40 +72,29 @@ extern "C" {
 class Logging {
 private:
 	int _level;
-	long _baud;
-	boolean _sd_card_present;
-	File* _log_to_file;
+	Print* pprinter;
 public:
-	Logging(){};
+	//Logging(){};
 
-	void Init(int level, long baud);
+	void Init(int level, Print* pprinter);
 
 	void Error(const __FlashStringHelper *ifsh, ...);
 	void Info(const __FlashStringHelper *ifsh, ...);
 	void Debug(const __FlashStringHelper *ifsh, ...);
-	void Verbose(const __FlashStringHelper *ifsh, ...);   
+	void Verbose(const __FlashStringHelper *ifsh, ...);
 
 	//void Error(char* msg, ...);
 	//void Info(char* msg, ...);
 	//void Debug(char* msg, ...);
 	//void Verbose(char* msg, ...);   
 
-	void UseSDCard();
 
-	void GetLogFileName(char* prefix, char* buffer);
-
-	inline int GetLevel() {return _level;}
-	inline void SetLogLevel(int level) {_level = level;}
-	inline boolean IsVerbose() {return _level == LOG_LEVEL_VERBOSE;}
+	inline int GetLevel() { return _level; }
+	inline void SetLogLevel(int level) { _level = level; }
+	inline boolean IsVerbose() { return _level == LOG_LEVEL_VERBOSE; }
 private:
 	void print(const __FlashStringHelper *format, va_list args);
 	void print(Stream* stream, const __FlashStringHelper *format, va_list args);
-	
-	void print_date_time(Stream* stream, time_t tm);
-
-	void open_file();
-	void close_file();
-	void get_log_file_name(char* prefix, char* buffer);
 };
 
 extern Logging Log;

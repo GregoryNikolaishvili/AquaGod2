@@ -237,3 +237,11 @@ const int TEMP_SENSOR_HOSPITAL = 4;
 const int TEMP_SENSOR_ROOM = 5;
 const int TEMP_SENSOR_RESERVE_1 = 6;
 const int TEMP_SENSOR_RESERVE_2 = 7;
+
+class Logger : public Print
+{
+public:
+	Logger() { }
+
+	size_t write(uint8_t c);
+};

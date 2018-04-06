@@ -203,8 +203,8 @@ boolean deviceSetStateNoMainModeCheck(byte device_id, int state)
 {
 	if (devices[device_id].setStateFunction != NULL)
 		return devices[device_id].setStateFunction(device_id, state);
-	else
-		return deviceRelaySetState(device_id, state);
+	
+	return deviceRelaySetState(device_id, state);
 }
 
 void arduinoPinSetState(byte pin, boolean on, boolean isReversed)
