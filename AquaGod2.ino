@@ -1,3 +1,7 @@
+#define REQUIRESALARMS false // FOR DS18B20 library
+#define MQTT_MAX_PACKET_SIZE 256 // FOR PubSubClient library
+#define MQTT_SOCKET_TIMEOUT 5 // FOR PubSubClient library
+
 #define USE_NEW_KEYPAD
 
 // https://www.youtube.com/watch?v=uDdiMMdVb90
@@ -10,7 +14,7 @@
 #include "AquaGodState.h"
 
 #include <Wire.h> // 207 bytes
-#include <OneWire.h>
+#include <OneWire.h>  // https://github.com/PaulStoffregen/OneWire
 
 //#include <DallasTemperature.h>
 
