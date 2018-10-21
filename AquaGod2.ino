@@ -65,7 +65,7 @@ void setup()
 		aquaGodState.setErrorCode(ERR_SYSTEM);
 
 	Log.Init(LOG_LEVEL_VERBOSE, &logger); // also calls Serial.begin
-	Log.Info(F("\r\nInitializing.."), 0);
+	Log.Info(F("\r\nInitializing.. ver. 1.0.0"), 0);
 
 	pinMode(PIN_BLINKING_LED, OUTPUT);
 	//pinMode(PIN_SD_CARD, OUTPUT);
