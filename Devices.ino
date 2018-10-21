@@ -53,97 +53,97 @@ device devices[] =
 							}
 								,
 
-									// Board 2 (8 - 15)
-								{
-									"O2", PIN_O2, false, DEVICE_ON, DO_LOG, NULL, false	// nearly always on, so not reversed
-								}
-									,
-									{
-										"CO2", PIN_CO2, true, DEVICE_OFF, DO_LOG, co2_SET, false
-									}
-										,
-										{
-											"CO2 Pump", PIN_CO2_PUMP, false, DEVICE_OFF, DO_LOG, NULL, false // nearly always on, so not reversed
-										}
-											,
-											{
-												"Drain Pump", PIN_WATER_DRAIN_PUMP, true, DEVICE_OFF, DO_LOG, drainFill_SET, false
-											}
-												,
-												{
-													"DEVICE_220_A", PIN_220A, true, DEVICE_FREE, DO_LOG, NULL, false
-												}
-													,
-													{
-														"DEVICE_220_B", PIN_220B, true, DEVICE_FREE, DO_LOG, NULL, false
-													}
-														,
-														{
-															"Moon Light", PIN_MOON_LIGHT, true, DEVICE_FREE, DO_LOG, NULL, false // 2 sockets
-														}
-															,
-															{
-																"B2 Relay 8", PIN_BOARD2_RELAY_FREE, true, DEVICE_FREE, DO_LOG, NULL, false // not connected
-															}
-																,
-																	// Board 3 (15 - 23)
-																{
-																	"Fill Pump", PIN_WATER_FILL_PUMP, true, DEVICE_OFF, NO_LOG, drainFill_SET, false
-																}
-																	,
-																	{
-																		"Dosing Macro", PIN_DOSING_PUMP_MACRO, true, DEVICE_OFF, NO_LOG, NULL, false
-																	}
-																		,
-																		{
-																			"Dosing Micro", PIN_DOSING_PUMP_MICRO, true, DEVICE_OFF, NO_LOG, NULL, false
-																		}
-																			,
-																			{
-																				"Sump R. Pump", PIN_SUMP_RECIRCULATE_PUMP, false, DEVICE_ON, DO_LOG, NULL, false // nearly always on, so not reversed
-																			}
-																				,
-																				{
-																					"UV Light", PIN_UV_LIGHT, true, DEVICE_OFF, DO_LOG, uvlight_SET, false
-																				}
-																					,
-																					{
-																						"Filter 2", PIN_CANISTER_FILTER2, false, DEVICE_ON, DO_LOG, filter_SET, false // nearly always on, so not reversed
-																					}
-																						,
-																						{
-																							"Filter 1", PIN_CANISTER_FILTER1, false, DEVICE_ON, DO_LOG, filter_SET, false	// nearly always on, so not reversed
-																						}
-																							,
-																							{
-																								"Hospital Light", PIN_HOSPITAL_LIGHT, true, DEVICE_FREE, DO_LOG, NULL, false
-																							}
-																								,
+	// Board 2 (8 - 15)
+{
+	"O2", PIN_O2, false, DEVICE_ON, DO_LOG, NULL, false	// nearly always on, so not reversed
+}
+	,
+	{
+		"CO2", PIN_CO2, true, DEVICE_OFF, DO_LOG, co2_SET, false
+	}
+		,
+		{
+			"CO2 Pump", PIN_CO2_PUMP, false, DEVICE_OFF, DO_LOG, NULL, false // nearly always on, so not reversed
+		}
+			,
+			{
+				"Drain Pump", PIN_WATER_DRAIN_PUMP, true, DEVICE_OFF, DO_LOG, drainFill_SET, false
+			}
+				,
+				{
+					"DEVICE_220_A", PIN_220A, true, DEVICE_FREE, DO_LOG, NULL, false
+				}
+					,
+					{
+						"DEVICE_220_B", PIN_220B, true, DEVICE_FREE, DO_LOG, NULL, false
+					}
+						,
+						{
+							"Moon Light", PIN_MOON_LIGHT, true, DEVICE_FREE, DO_LOG, NULL, false // 2 sockets
+						}
+							,
+							{
+								"B2 Relay 8", PIN_BOARD2_RELAY_FREE, true, DEVICE_FREE, DO_LOG, NULL, false // not connected
+							}
+								,
+	// Board 3 (15 - 23)
+{
+	"Fill Pump", PIN_WATER_FILL_PUMP, true, DEVICE_OFF, NO_LOG, drainFill_SET, false
+}
+	,
+	{
+		"Dosing Macro", PIN_DOSING_PUMP_MACRO, true, DEVICE_OFF, NO_LOG, NULL, false
+	}
+		,
+		{
+			"Dosing Micro", PIN_DOSING_PUMP_MICRO, true, DEVICE_OFF, NO_LOG, NULL, false
+		}
+			,
+			{
+				"Sump R. Pump", PIN_SUMP_RECIRCULATE_PUMP, false, DEVICE_ON, DO_LOG, NULL, false // nearly always on, so not reversed
+			}
+				,
+				{
+					"UV Light", PIN_UV_LIGHT, true, DEVICE_OFF, DO_LOG, uvlight_SET, false
+				}
+					,
+					{
+						"Filter 2", PIN_CANISTER_FILTER2, false, DEVICE_ON, DO_LOG, filter_SET, false // nearly always on, so not reversed
+					}
+						,
+						{
+							"Filter 1", PIN_CANISTER_FILTER1, false, DEVICE_ON, DO_LOG, filter_SET, false	// nearly always on, so not reversed
+						}
+							,
+							{
+								"Hospital Light", PIN_HOSPITAL_LIGHT, true, DEVICE_FREE, DO_LOG, NULL, false
+							}
+								,
 
-																									// Other (24 - 29)
-																								{
-																									"Heater", -1, false, DEVICE_OFF, NO_LOG, aquariumHeater_SET, false
-																								}
-																									,
-																									{
-																										"Sump Heater", -1, false, DEVICE_OFF, NO_LOG, aquariumHeater_SET, false
-																									}
-																										,
-																										{
-																											"Hosp. Heater", -1, false, DEVICE_OFF, NO_LOG, aquariumHeater_SET, false
-																										}
-																											,
-																											{
-																												"Solenoid", -1, false, DEVICE_OFF, DO_LOG, solenoid_SET, false
-																											}
-																												,
-																												{
-																													"Board Fan", PIN_BOARD_FAN_PWM, false, DEVICE_FREE, NO_LOG, boardFanSet, true
-																												}
-																													,
-																													{
-																														"Maint. Mode", -1, false, DEVICE_FREE, DO_LOG, maintMode_SET, true
-																													}
+	// Other (24 - 29)
+{
+	"Heater", -1, false, DEVICE_OFF, NO_LOG, aquariumHeater_SET, false
+}
+	,
+	{
+		"Sump Heater", -1, false, DEVICE_OFF, NO_LOG, aquariumHeater_SET, false
+	}
+		,
+		{
+			"Hosp. Heater", -1, false, DEVICE_OFF, NO_LOG, aquariumHeater_SET, false
+		}
+			,
+			{
+				"Solenoid", -1, false, DEVICE_OFF, DO_LOG, solenoid_SET, false
+			}
+				,
+				{
+					"Board Fan", PIN_BOARD_FAN_PWM, false, DEVICE_FREE, NO_LOG, boardFanSet, true
+				}
+					,
+					{
+						"Maint. Mode", -1, false, DEVICE_FREE, DO_LOG, maintMode_SET, true
+					}
 };
 
 const int DEVICE_COUNT = sizeof(devices) / sizeof(device);
@@ -157,7 +157,7 @@ int deviceCurrentState[DEVICE_COUNT];
 
 void initDevices()
 {
-	deviceSetCurrentState(MAINTENANCE_MODE,  0);
+	deviceSetCurrentState(MAINTENANCE_MODE, 0);
 	for (byte device_id = 0; device_id < DEVICE_COUNT; device_id++)
 	{
 		delay(10);
@@ -181,7 +181,7 @@ void initDevices()
 	pinMode(PIN_SOLENOID_IN2, OUTPUT);
 }
 
-void deviceSwitchState(byte device_id)
+void deviceSwitchState(int device_id)
 {
 	if (deviceGetState(device_id) > 0)
 		deviceSetState(device_id, 0);
@@ -190,21 +190,21 @@ void deviceSwitchState(byte device_id)
 }
 
 // returns TRUE if state changed
-boolean deviceSetState(byte device_id, int state)
+void deviceSetState(int device_id, int state)
 {
 	if ((state > 0) && deviceGetState(MAINTENANCE_MODE) > 0)
-		return false;
+		return;
 
-	return deviceSetStateNoMainModeCheck(device_id, state);
+	deviceSetStateNoMaintModeCheck(device_id, state);
 }
 
 // returns TRUE if state changed
-boolean deviceSetStateNoMainModeCheck(byte device_id, int state)
+void deviceSetStateNoMaintModeCheck(byte device_id, int state)
 {
 	if (devices[device_id].setStateFunction != NULL)
-		return devices[device_id].setStateFunction(device_id, state);
-	
-	return deviceRelaySetState(device_id, state);
+		devices[device_id].setStateFunction(device_id, state);
+	else
+		deviceRelaySetState(device_id, state);
 }
 
 void arduinoPinSetState(byte pin, boolean on, boolean isReversed)
@@ -295,7 +295,7 @@ void deviceLog(byte device_id, int state)
 
 unsigned long prevSolenoidOff = 0;
 
-boolean solenoid_SET(byte device_id, int state)
+void solenoid_SET(int device_id, int state)
 {
 	arduinoPinSetState(PIN_SOLENOID_IN1, 0, false);
 	arduinoPinSetState(PIN_SOLENOID_IN2, 0, false);
@@ -316,11 +316,10 @@ boolean solenoid_SET(byte device_id, int state)
 
 	if (state == 0)
 		prevSolenoidOff = secondTicks;
-	return true;
 }
 
 
-boolean maintMode_SET(byte id, int state)
+void maintMode_SET(int id, int state)
 {
 	deviceSetCurrentState(MAINTENANCE_MODE, state);
 	if (state == 0)
@@ -342,10 +341,9 @@ boolean maintMode_SET(byte id, int state)
 				deviceSetState(device_id, DEVICE_OFF);
 		}
 	}
-	return true;
 }
 
-boolean boardFanSet(byte id, int state) // state = %
+void boardFanSet(int id, int state) // state = %
 {
 	if (state < 0)
 		state = 0;
@@ -357,7 +355,6 @@ boolean boardFanSet(byte id, int state) // state = %
 
 	pwmWrite(PIN_BOARD_FAN_PWM, state * 255 / 100);
 	deviceSetCurrentState(BOARD_FAN, state);
-	return true;
 }
 
 

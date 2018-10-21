@@ -193,7 +193,7 @@ void oncePerHalfSecond(void)
 }
 
 
-boolean oncePerSecond(byte id, int tag)
+void oncePerSecond(int id, int tag)
 {
 	processWaterLevels(); // processes water levels and shuts down Solenoid if necessary
 

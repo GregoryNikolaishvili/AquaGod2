@@ -101,20 +101,20 @@ boolean getDeviceStateByTime(byte device_id, time_t onTime, time_t offTime)
 		b = (time_now >= onTime) && (time_now < offTime);
 	}
 	else
-	if (onTime > offTime)
-	{
-		time_t t = onTime;
-		onTime = offTime;
-		offTime = t;
-		b = !((time_now >= onTime) && (time_now < offTime));
-	}
-	else // if equals
-	{
-		if (deviceGetDefaultState(device_id) != DEVICE_FREE)
-			b = deviceGetDefaultState(device_id);
-		else
-			b = false;
-	}
+		if (onTime > offTime)
+		{
+			time_t t = onTime;
+			onTime = offTime;
+			offTime = t;
+			b = !((time_now >= onTime) && (time_now < offTime));
+		}
+		else // if equals
+		{
+			if (deviceGetDefaultState(device_id) != DEVICE_FREE)
+				b = deviceGetDefaultState(device_id);
+			else
+				b = false;
+		}
 	return b;
 }
 
@@ -147,21 +147,21 @@ void processWaterLevels()
 		}
 		else
 			// if water sump is full (at least one sensor)
-		if (aquaGodState.getWaterLevelIsCriticallyHighInSump() || (sumpLevel >= 100))
-		{
-			if (prevSumpFullSeconds == 0)
-				prevSumpFullSeconds = secondTicks;
-
-			if ((secondTicks - prevSumpFullSeconds) >= 600) // 10 min
+			if (aquaGodState.getWaterLevelIsCriticallyHighInSump() || (sumpLevel >= 100))
 			{
-				prevSumpFullSeconds = 0;
+				if (prevSumpFullSeconds == 0)
+					prevSumpFullSeconds = secondTicks;
 
-				//Turn off solenoid in 10 min
-				solenoid_SET(SOLENOID, DEVICE_OFF);
+				if ((secondTicks - prevSumpFullSeconds) >= 600) // 10 min
+				{
+					prevSumpFullSeconds = 0;
+
+					//Turn off solenoid in 10 min
+					solenoid_SET(SOLENOID, DEVICE_OFF);
+				}
 			}
-		}
-		else
-			prevSumpFullSeconds = 0;
+			else
+				prevSumpFullSeconds = 0;
 	}
 
 	// Sump pump
@@ -182,20 +182,20 @@ void processWaterLevels()
 
 	switch (waterChangeState)
 	{
-		WATER_CHANGE_STATE_DRAIN:
-			if (aquaGodState.getAquariumWaterLevel() < settings.waterDrainLevel)
-				deviceSetState(WATER_DRAIN_PUMP, 0);
-			break;
-		WATER_CHANGE_STATE_FILL:
-			if (aquaGodState.getAquariumWaterLevel() > 110)
-				deviceSetState(WATER_FILL_PUMP, 0);
-			break;
-		WATER_CHANGE_STATE_DRAIN2:
-			if (aquaGodState.getAquariumWaterLevel() <= 100)
-				deviceSetState(WATER_DRAIN_PUMP, 0);
-			break;
-		default:
-			break;
+	WATER_CHANGE_STATE_DRAIN:
+		if (aquaGodState.getAquariumWaterLevel() < settings.waterDrainLevel)
+			deviceSetState(WATER_DRAIN_PUMP, 0);
+		break;
+	WATER_CHANGE_STATE_FILL:
+		if (aquaGodState.getAquariumWaterLevel() > 110)
+			deviceSetState(WATER_FILL_PUMP, 0);
+		break;
+	WATER_CHANGE_STATE_DRAIN2:
+		if (aquaGodState.getAquariumWaterLevel() <= 100)
+			deviceSetState(WATER_DRAIN_PUMP, 0);
+		break;
+	default:
+		break;
 	}
 }
 
@@ -243,7 +243,7 @@ void processPumps()
 }
 
 
-boolean aquariumHeater_SET(byte device_id, int state)
+void aquariumHeater_SET(int device_id, int state)
 {
 	if ((state < 0) || ((device_id == HEATER) && (deviceGetState(FILTER_2) <= 0))) // if filter 2 is not working, turn off main heaters
 		state = 0;
@@ -251,26 +251,25 @@ boolean aquariumHeater_SET(byte device_id, int state)
 		state = 100;
 
 	deviceSetCurrentState(device_id, state);
-	return true;
 }
 
-boolean co2_SET(byte device_id, int state)
+void co2_SET(int device_id, int state)
 {
 	if (deviceGetState(FILTER_2) > 0)
-		return deviceRelaySetState(device_id, state);
+		deviceRelaySetState(device_id, state);
 	else
-		return deviceRelaySetState(device_id, 0);
+		deviceRelaySetState(device_id, 0);
 }
 
-boolean uvlight_SET(byte device_id, int state)
+void uvlight_SET(int device_id, int state)
 {
 	if (deviceGetState(FILTER_1) > 0)
-		return deviceRelaySetState(device_id, state);
+		deviceRelaySetState(device_id, state);
 	else
-		return deviceRelaySetState(device_id, 0);
+		deviceRelaySetState(device_id, 0);
 }
 
-boolean filter_SET(byte device_id, int state)
+void filter_SET(int device_id, int state)
 {
 	if (state <= 0)
 	{
@@ -279,22 +278,22 @@ boolean filter_SET(byte device_id, int state)
 			deviceSetState(UV_LIGHT, 0); // Turn of UV light
 		}
 		else
-		if (device_id == FILTER_2)
-		{
-			deviceSetState(HEATER, 0); // Turn of main heaters
-			deviceSetState(CO2, 0); // Turn of co2
-		}
+			if (device_id == FILTER_2)
+			{
+				deviceSetState(HEATER, 0); // Turn of main heaters
+				deviceSetState(CO2, 0); // Turn of co2
+			}
 	}
 
-	return deviceRelaySetState(device_id, state);
+	deviceRelaySetState(device_id, state);
 }
 
-boolean drainFill_SET(byte device_id, int state)
+void drainFill_SET(int device_id, int state)
 {
 	if (state <= 0)
 		waterChangeState = WATER_CHANGE_STATE_NONE;
 
-	return deviceRelaySetState(device_id, state);
+	deviceRelaySetState(device_id, state);
 }
 
 void processAquariumHeaters()
@@ -305,7 +304,7 @@ void processAquariumHeaters()
 		windowStartTime += 100;
 
 	int output = deviceGetState(HEATER);
-	if (output < secondTicks - windowStartTime)
+	if (output < (int)(secondTicks - windowStartTime))
 	{
 		arduinoPinSetState(PIN_HEATER_1, false, false);
 		arduinoPinSetState(PIN_HEATER_2, false, false);
@@ -317,7 +316,7 @@ void processAquariumHeaters()
 	}
 
 	output = deviceGetState(SUMP_HEATER);
-	if (output < secondTicks - windowStartTime)
+	if (output < (int)(secondTicks - windowStartTime))
 	{
 		arduinoPinSetState(PIN_SUMP_HEATER, false, false);
 	}
@@ -327,7 +326,7 @@ void processAquariumHeaters()
 	}
 
 	output = deviceGetState(HOSPITAL_HEATER);
-	if (output < secondTicks - windowStartTime)
+	if (output < (int)(secondTicks - windowStartTime))
 	{
 		arduinoPinSetState(PIN_HOSPITAL_HEATER, false, false);
 	}
@@ -379,7 +378,7 @@ void processAquarium()
 		deviceSetState(HOSPITAL_HEATER, 0);
 }
 
-boolean waterChangeTimerDrain(byte id, int tag)
+void waterChangeTimerDrain(int id, int tag)
 {
 	if (bitRead(settings.waterChangeDOW, weekday() - 1) != 0) // (Sunday is day 1)  
 	{
@@ -387,19 +386,17 @@ boolean waterChangeTimerDrain(byte id, int tag)
 		int TS = aquaGodState.getSumpTemperature();
 
 		if ((TA >= 9000) || (TS >= 9000))
-			return false;
+			return;
 		if (((TA - TS) > 100) || (TS - TA) > 200) // if more than 1 or 2 degree celsius difference
-			return false;
+			return;
 
 		Log.Info(F("Changing water (drain)"));
 		waterChangeState = WATER_CHANGE_STATE_DRAIN;
-		return deviceSetState(WATER_DRAIN_PUMP, settings.waterDrainDuration);
+		deviceSetState(WATER_DRAIN_PUMP, settings.waterDrainDuration);
 	}
-	else
-		return false;
 }
 
-boolean waterChangeTimerFill(byte id, int tag)
+void waterChangeTimerFill(int id, int tag)
 {
 	if (bitRead(settings.waterChangeDOW, weekday() - 1) != 0) // (Sunday is day 1)  
 	{
@@ -407,72 +404,61 @@ boolean waterChangeTimerFill(byte id, int tag)
 		int TS = aquaGodState.getSumpTemperature();
 
 		if ((TA >= 9000) || (TS >= 9000))
-			return false;
+			return;
 		if (((TA - TS) > 100) || (TS - TA) > 200) // if more than 1 or 2 degree celsius difference
-			return false;
+			return;
 
 		Log.Info(F("Changing water (fill)"));
 		waterChangeState = WATER_CHANGE_STATE_FILL;
 		return deviceSetState(WATER_FILL_PUMP, settings.waterFillDuration);
 	}
-	else
-		return false;
 }
 
-boolean waterChangeTimerDrain2(byte id, int tag)
+void waterChangeTimerDrain2(int id, int tag)
 {
 	if (bitRead(settings.waterChangeDOW, weekday() - 1) != 0) // (Sunday is day 1)  
 	{
 		Log.Info(F("Changing water (extra drain)"));
 		waterChangeState = WATER_CHANGE_STATE_DRAIN2;
-		return deviceSetState(WATER_DRAIN_PUMP, settings.waterDrainDuration2);
+		deviceSetState(WATER_DRAIN_PUMP, settings.waterDrainDuration2);
 	}
-	else
-		return false;
 }
 
 
 
-boolean dosingMacroTimer(byte id, int tag)
+void dosingMacroTimer(int id, int tag)
 {
 	if (bitRead(settings.dosingMacroDOW, weekday() - 1) != 0) // (Sunday is day 1)  
 	{
 		Log.Info(F("Dosing macro fertilizers"));
-		return deviceSetState(DOSING_PUMP_MACRO, settings.dosingMacroDuration);
+		deviceSetState(DOSING_PUMP_MACRO, settings.dosingMacroDuration);
 	}
-	else
-		return false;
 }
 
-boolean dosingMicroTimer(byte id, int tag)
+void dosingMicroTimer(int id, int tag)
 {
 	if (bitRead(settings.dosingMicroDOW, weekday() - 1) != 0) // (Sunday is day 1)  
 	{
 		Log.Info(F("Dosing micro fertilizers"));
 		return deviceSetState(DOSING_PUMP_MICRO, settings.dosingMicroDuration);
 	}
-	else
-		return false;
 }
 
 
-boolean fishFeederTimer(byte id, int tag)
+void fishFeederTimer(int id, int tag)
 {
 	if (bitRead(settings.feedDOW, weekday() - 1) != 0) // (Sunday is day 1)  
-		return feedFish(FEEDER_1, DEVICE_ON);
-	else
-		return false;
+		feedFish(FEEDER_1, DEVICE_ON);
 }
 
-boolean feedFish(byte id, int state)
+void feedFish(int id, int state)
 {
 	if (state == 0)
-		return false;
+		return;
 
 	relayOn(id);
 	delay(500);
 	relayOff(id);
-	return true;
 }
 
 
